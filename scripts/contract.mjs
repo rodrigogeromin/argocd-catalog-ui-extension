@@ -25,7 +25,7 @@ function validate(value, rule, location) {
 export function normalize(input) {
   const result = validate(input,schema,'parameters');
   if (!result) throw new Error('Parameters required');
-  return {schemaVersion, templateVersion, ...result, registration:{title:'Catálogo de serviços',id:result.name,iconClassName:'fa fa-th-large',isMiddle:true,...result.registration}};
+  return {schemaVersion, templateVersion, ...result, registration:{title:'Catálogo de serviços',id:result.name,iconClassName:'fa fa-th-large',isMiddle:false,...result.registration}};
 }
 
 // Project manifests add provenance fields; generation parameters still use one schema.

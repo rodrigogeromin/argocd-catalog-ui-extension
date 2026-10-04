@@ -4,6 +4,9 @@ html[data-theme="dark"] body { background: #171b26; color: #edf2f7; color-scheme
 .preview-shell { max-width: 100%; margin: 0 auto; }
 .preview-toolbar { display: flex; align-items: center; justify-content: space-between; min-height: 52px; padding: 8px 18px; border-bottom: 1px solid #dfe5ea; background: #fff; }
 .preview-app { font-weight: 600; }
+.preview-toolbar .argo-button { display: inline-block; padding: 6px 10px; border: 0; border-radius: 24px; color: #f5f6f7; background: #596773; font: 500 13px/1.4 system-ui, sans-serif; text-transform: uppercase; cursor: pointer; transition: background-color .2s, border .2s, color .2s; }
+.preview-toolbar .argo-button:hover, .preview-toolbar .argo-button:focus-visible { color: #f5f6f7; background: #78848e; }
+.preview-toolbar .argo-button i { margin-left: -5px; margin-right: 5px; }
 .preview-panel { min-height: 0; max-height: calc(100vh - 53px); overflow: auto; }
 .preview-hint { padding: 16px; color: #718291; }
 html[data-theme="dark"] .preview-toolbar { border-color: #45515d; background: #252d35; }

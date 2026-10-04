@@ -28,13 +28,18 @@ test('production bundle registers and renders against simulated host globals', (
   freeze(frozen);
   // Indirect eval models the host loading extension JS; this is not Argo CD integration.
   (0, eval)(readFileSync(`dist/resources/extension-${project.name}.js`, 'utf8'));
-  expect(register).toHaveBeenCalledWith(expect.any(Function), project.registration.title, project.registration.id, expect.any(Function), expect.any(Function), project.registration.iconClassName, project.registration.isMiddle);
+  expect(register).toHaveBeenCalledWith(expect.any(Function), project.registration.title, project.registration.id, expect.any(Function), expect.any(Function), project.registration.iconClassName, false);
   if (!component || !flyout) throw new Error('No host registration');
   const Component = component;
   const Flyout = flyout;
-  render(<Component {...frozen} />);
-  fireEvent.click(screen.getByRole('button', {name: 'Abrir catálogo de serviços'}));
+  render(<button className="argo-button argo-button--base" type="button" onClick={openFlyout}>
+    <i className={project.registration.iconClassName} aria-hidden="true" />
+    <span className="show-for-large"><Component {...frozen} /></span>
+  </button>);
+  fireEvent.click(screen.getByRole('button', {name: 'Catálogo'}));
   expect(openFlyout).toHaveBeenCalled();
+  expect(document.querySelectorAll('i.fa')).toHaveLength(1);
+  expect(document.querySelector('button button')).not.toBeInTheDocument();
   cleanup();
   render(<Flyout {...validContext} />);
   expect(screen.getByText('6 serviços')).toBeInTheDocument();

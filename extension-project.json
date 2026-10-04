@@ -9,7 +9,7 @@
     "title": "Catálogo de serviços",
     "id": "service-catalog",
     "iconClassName": "fa fa-th-large",
-    "isMiddle": true
+    "isMiddle": false
   },
   "dataSource": "host-props",
   "origin": {
