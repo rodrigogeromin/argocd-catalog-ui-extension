@@ -1,4 +1,4 @@
-name: Build and publish extension artifact
+name: Build and release extension
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - develop
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   build:
@@ -30,14 +30,15 @@ jobs:
       - name: Check validation evidence
         run: npm run evidence:check
 
-      - name: Name build archive
-        run: cp dist/service-catalog.tar.gz "dist/argocd-service-catalog-${GITHUB_SHA}.tar.gz"
+      - name: Name release archive
+        run: cp dist/service-catalog.tar.gz "dist/argocd-service-catalog-develop-${GITHUB_SHA}.tar.gz"
 
-      - name: Upload extension artifact
-        uses: actions/upload-artifact@v7
-        with:
-          name: argocd-service-catalog-${{ github.sha }}
-          path: dist/argocd-service-catalog-${{ github.sha }}.tar.gz
-          if-no-files-found: error
-          retention-days: 30
-          compression-level: 0
+      - name: Publish GitHub prerelease
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: >-
+          gh release create "develop-${GITHUB_SHA}"
+          "dist/argocd-service-catalog-develop-${GITHUB_SHA}.tar.gz"
+          --target "${GITHUB_SHA}"
+          --prerelease
+          --generate-notes

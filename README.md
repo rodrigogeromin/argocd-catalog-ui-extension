@@ -19,6 +19,6 @@ Preview the flyout at `http://127.0.0.1:8080/?width=360px&height=640px` and `?wi
 
 ## Publish and install
 
-Push a commit to `develop` to run `.github/workflows/release.yml`. GitHub Actions validates, builds and packages the extension, then uploads `argocd-service-catalog-<commit-sha>.tar.gz` as a workflow artifact, available from that run for 30 days.
+Push a commit to `develop` to run `.github/workflows/release.yml`. GitHub Actions validates, builds and packages the extension, then creates a GitHub prerelease tagged `develop-<commit-sha>` with `argocd-service-catalog-develop-<commit-sha>.tar.gz` attached.
 
 The bundle was smoke-tested on the accessible v3.5.1 cluster by briefly placing it in `/tmp/extensions` and confirming `/extensions.js` served it; that temporary file was removed. Browser interaction in Argo CD and persistent cluster installation have not been verified. Follow the Argo CD UI extension guide to choose a persistent installer for your environment.

@@ -14,7 +14,7 @@ Use TypeScript and React with two-space indentation. Name React components in Pa
 
 ## Releases and Security
 
-The GitHub Actions workflow runs on pushes to `develop` and uploads a commit-specific archive as a workflow artifact for 30 days. Pull requests should describe behavior changes, list validation, and include narrow and wide preview screenshots for UI changes. The extension archive excludes development dependencies and credentials. At the last registry audit, four high advisories remained in the preview-only `webpack-dev-server` dependency chain through `braces` 3.0.3; the registry had no newer `braces` version. Keep preview bound to localhost and recheck the audit before changing or publishing the toolchain.
+The GitHub Actions workflow runs on pushes to `develop` and publishes a prerelease tagged with the commit SHA, with the packaged archive attached. Pull requests should describe behavior changes, list validation, and include narrow and wide preview screenshots for UI changes. The extension archive excludes development dependencies and credentials. At the last registry audit, four high advisories remained in the preview-only `webpack-dev-server` dependency chain through `braces` 3.0.3; the registry had no newer `braces` version. Keep preview bound to localhost and recheck the audit before changing or publishing the toolchain.
 
 ## Commits
 
