@@ -13,7 +13,9 @@
 }
 .svc-catalog * { box-sizing: border-box; }
 .svc-catalog__header { padding: 20px 24px 17px; background: var(--svc-surface); border-bottom: 1px solid var(--svc-border); }
-.svc-catalog__eyebrow { margin: 0 0 6px; color: #54708a; font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+.svc-catalog__brand { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 6px; }
+.svc-catalog__eyebrow { margin: 0; color: #54708a; font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
+.svc-catalog__version { flex: none; padding: 3px 7px; border: 1px solid var(--svc-border); border-radius: 999px; color: var(--svc-muted); background: var(--svc-surface); font-size: 10px; font-weight: 600; line-height: 1.2; }
 .svc-catalog__header h1 { margin: 0; color: var(--svc-ink); font-size: 22px; line-height: 1.25; font-weight: 650; }
 .svc-catalog__subtitle { max-width: 660px; margin: 7px 0 0; color: var(--svc-muted); }
 .svc-catalog__layout { display: grid; grid-template-columns: 195px minmax(0, 1fr); min-height: 430px; }

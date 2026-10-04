@@ -43,6 +43,9 @@ test('production bundle registers and renders against simulated host globals', (
   cleanup();
   render(<Flyout {...validContext} />);
   expect(screen.getByText('6 serviços')).toBeInTheDocument();
+  const versionBadge = document.querySelector('.svc-catalog__version');
+  expect(versionBadge).toHaveTextContent(/^v\d+\.\d+\.\d+(?:-dev\.\d+)?$/);
+  expect(versionBadge).toHaveAttribute('aria-label', `Versão ${versionBadge?.textContent}`);
   expect(globals.React).toBe(React);
   expect(globals.ReactDOM).toBe(ReactDOM);
   expect(globals.ReactJSXRuntime).toBe(ReactJSXRuntime);

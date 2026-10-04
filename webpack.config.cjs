@@ -3,8 +3,10 @@ const fs = require('node:fs');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 const config = JSON.parse(fs.readFileSync('./extension-project.json', 'utf8'));
+const packageJson = JSON.parse(fs.readFileSync('./package.json', 'utf8'));
 module.exports = (_, argv) => {
   const production = argv.mode === 'production';
+  const extensionVersion = process.env.EXTENSION_VERSION || `v${packageJson.version}`;
   return {
     mode: production ? 'production' : 'development',
     entry: production ? './src/index.tsx' : './dev/main.tsx',
@@ -17,7 +19,7 @@ module.exports = (_, argv) => {
     ]},
     externals: production ? {'react': 'React', 'react-dom': 'ReactDOM', 'react/jsx-runtime': 'ReactJSXRuntime'} : {},
     optimization: {splitChunks: false, runtimeChunk: false, moduleIds: 'deterministic'},
-    plugins: [new webpack.optimize.LimitChunkCountPlugin({maxChunks: 1}), ...(production ? [
+    plugins: [new webpack.DefinePlugin({__EXTENSION_VERSION__: JSON.stringify(extensionVersion)}), new webpack.optimize.LimitChunkCountPlugin({maxChunks: 1}), ...(production ? [
       {apply(compiler) {compiler.hooks.done.tap('ModuleEvidence', stats => {
         const json = stats.toJson({all: false, modules: true, nestedModules: true, errors: true});
         fs.writeFileSync(path.resolve(__dirname, 'dist/build-modules.json'), JSON.stringify(json, null, 2));

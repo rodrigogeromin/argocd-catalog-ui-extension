@@ -24,18 +24,20 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Validate, build and package
-        run: npm run validate
-
-      - name: Check validation evidence
-        run: npm run evidence:check
-
       - name: Determine development version
         id: version
         run: |
           base_version="$(node -p 'require("./package.json").version')"
           version="${base_version}-dev.${GITHUB_RUN_NUMBER}"
           echo "version=${version}" >> "$GITHUB_OUTPUT"
+
+      - name: Validate, build and package
+        env:
+          EXTENSION_VERSION: v${{ steps.version.outputs.version }}
+        run: npm run validate
+
+      - name: Check validation evidence
+        run: npm run evidence:check
 
       - name: Name release archive
         run: cp dist/service-catalog.tar.gz "dist/argocd-service-catalog-${{ steps.version.outputs.version }}.tar.gz"

@@ -3,6 +3,7 @@ import type {FlyoutProps} from '../argocd/types';
 import {categories, services, categoryLabel, type CatalogService} from '../features/catalog/data';
 import '../styles/extension.css';
 import project from '../../extension-project.json';
+import {extensionVersion} from './version';
 
 export function Extension({application}: FlyoutProps) {
   const [activeCategory, setActiveCategory] = useState('all');
@@ -16,7 +17,10 @@ export function Extension({application}: FlyoutProps) {
 
   return <section className="svc-catalog" aria-label={project.registration.title}>
     <header className="svc-catalog__header">
-      <p className="svc-catalog__eyebrow">Argo CD · Catálogo</p>
+      <div className="svc-catalog__brand">
+        <p className="svc-catalog__eyebrow">Argo CD · Catálogo</p>
+        <span className="svc-catalog__version" aria-label={`Versão ${extensionVersion}`}>{extensionVersion}</span>
+      </div>
       <h1>{selected?.name ?? 'Serviços integrados'}</h1>
       <p className="svc-catalog__subtitle">{selected?.summary ?? 'Explore ferramentas que ampliam o fluxo GitOps e as aplicações Kubernetes.'}</p>
     </header>

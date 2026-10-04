@@ -4,6 +4,8 @@ An Argo CD UI extension that adds a **Catálogo** action to an Application’s t
 
 The project was generated from the local `argocd-ui-extension` skill template, then adapted from its resource-tab profile to the host’s `registerTopBarActionMenuExt` API. Its manifest now uses schema v2 and the `top-bar-action` profile. `templateVersion: "1.0.0"` records the original scaffold; it is not a runtime compatibility requirement. Its exact contract targets the accessible Argo CD **3.5.1** cluster; details and source references are in `references/host-and-evidence.md` and `extension-project.json`.
 
+The flyout header shows the version embedded in the running bundle. GitHub Actions injects its `v<base>-dev.<run>` prerelease tag during the release build; local preview falls back to the `package.json` version.
+
 ## Develop and validate
 
 ```sh
@@ -22,6 +24,6 @@ Preview the flyout at `http://127.0.0.1:8080/?width=360px&height=640px` and `?wi
 
 Push a commit to `develop` to run `.github/workflows/release.yml`. GitHub Actions validates, builds and packages the extension, then creates a GitHub prerelease with a friendly version such as `v0.1.0-dev.3` and attaches `argocd-service-catalog-0.1.0-dev.3.tar.gz`. The base version comes from `package.json`; the sequence is the workflow run number.
 
-Release `v0.1.0-dev.5` was published from commit `710f231` and installed on 2026-10-04 in `argocd/argocd-server`, running Argo CD v3.5.1. The `argocd-extension-installer-service-catalog` init container completed with exit code 0 and installs the archive into the shared `/tmp` volume. Archive SHA-256: `d49e22b899eda6d43bdea6522d5346807ecdb2c4048e1b3a8487455dfbbe9ccb`; installed bundle SHA-256: `8aeaad30be271e2f45924cf164fc126b8c177292e51b32debd7bafbfd872226d`. The Deployment recreates the installation on pod replacement; the volume itself is `emptyDir`.
+Release `v0.1.0-dev.7` was published and installed on 2026-10-04 in `argocd/argocd-server`, running Argo CD v3.5.1. The `argocd-extension-installer-service-catalog` init container completed with exit code 0 and installs the archive into the shared `/tmp` volume. Installed bundle SHA-256: `c337575a826f126fd88ead855c8dd5acdadd81e9fe1cb92b22af3ff1379ed8da`. The Deployment recreates the installation on pod replacement; the volume itself is `emptyDir`.
 
 The pod is Ready with the new bundle installed. Browser interaction in Argo CD remains unverified, so the local report keeps integration `not-run`. See `references/host-and-evidence.md` for the deployment record and verification boundary.

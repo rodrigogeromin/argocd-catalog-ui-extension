@@ -5,6 +5,12 @@ import {CatalogAction} from '../src/app/CatalogAction';
 import {register} from '../src/argocd/register';
 import {validContext, absentContext} from './fixtures/context';
 import project from '../extension-project.json';
+import {extensionVersion} from '../src/app/version';
+
+test('shows the running extension version in the catalog header', () => {
+  render(<Extension {...validContext} />);
+  expect(screen.getByLabelText(`Versão ${extensionVersion}`)).toHaveTextContent(extensionVersion);
+});
 
 test('filters by category and search, opens details and returns to the catalog', () => {
   render(<Extension {...validContext} />);

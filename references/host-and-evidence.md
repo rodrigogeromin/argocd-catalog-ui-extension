@@ -36,11 +36,10 @@ Read-only inspection on 2026-10-04 established:
 - Deployment: `argocd/argocd-server`, one replica, image `quay.io/argoproj/argocd:v3.5.1`.
 - Init container: `argocd-extension-installer-service-catalog`.
 - Installer image: `quay.io/argoprojlabs/argocd-extension-installer:v1.1.0@sha256:8c1fd0dc98b6339354ab50b0cbaf331d28019e5eec7f2c257e5fb5985c3e5664`.
-- Installed release: `v0.1.0-dev.5`, from [the release archive](https://github.com/rodrigogeromin/argocd-catalog-ui-extension/releases/download/v0.1.0-dev.5/argocd-service-catalog-0.1.0-dev.5.tar.gz), published from commit `710f231`.
+- Installed release: `v0.1.0-dev.7`, from [the release archive](https://github.com/rodrigogeromin/argocd-catalog-ui-extension/releases/download/v0.1.0-dev.7/argocd-service-catalog-0.1.0-dev.7.tar.gz).
 - Shared volume: `tmp`, `emptyDir`, mounted at `/tmp` in the installer and server. The init container restores the bundle when a new pod is created.
-- Observed pod: `argocd-server-6d47f88bf-zgqnf`, Ready; installer completed with exit code 0 after the v0.1.0-dev.5 rollout.
+- Observed Argo CD server pod: Ready; installer completed with exit code 0 after the v0.1.0-dev.7 rollout.
 - Bundle path: `/tmp/extensions/resources/extension-service-catalog.js`.
-- Release archive SHA-256: `d49e22b899eda6d43bdea6522d5346807ecdb2c4048e1b3a8487455dfbbe9ccb`.
-- Installed bundle SHA-256: `8aeaad30be271e2f45924cf164fc126b8c177292e51b32debd7bafbfd872226d`, read directly from the running server and matching the local validation report.
+- Installed bundle SHA-256: `c337575a826f126fd88ead855c8dd5acdadd81e9fe1cb92b22af3ff1379ed8da`, read directly from the running server and matching the local validation report.
 
 This confirms installation persistence through the Deployment configuration for the migrated source release, not browser interaction. Local validation regenerates evidence for local artifacts; it does not certify UI behavior. Keep `compatibility.integrated` empty until actual interaction is recorded for the exact target and bundle.
