@@ -30,15 +30,29 @@ jobs:
       - name: Check validation evidence
         run: npm run evidence:check
 
+      - name: Determine development version
+        id: version
+        run: |
+          base_version="$(node -p 'require("./package.json").version')"
+          version="${base_version}-dev.${GITHUB_RUN_NUMBER}"
+          echo "version=${version}" >> "$GITHUB_OUTPUT"
+
       - name: Name release archive
-        run: cp dist/service-catalog.tar.gz "dist/argocd-service-catalog-develop-${GITHUB_SHA}.tar.gz"
+        run: cp dist/service-catalog.tar.gz "dist/argocd-service-catalog-${{ steps.version.outputs.version }}.tar.gz"
 
       - name: Publish GitHub prerelease
         env:
           GH_TOKEN: ${{ github.token }}
-        run: >-
-          gh release create "develop-${GITHUB_SHA}"
-          "dist/argocd-service-catalog-develop-${GITHUB_SHA}.tar.gz"
-          --target "${GITHUB_SHA}"
-          --prerelease
-          --generate-notes
+          VERSION: ${{ steps.version.outputs.version }}
+        run: |
+          tag="v${VERSION}"
+          archive="dist/argocd-service-catalog-${VERSION}.tar.gz"
+          if gh release view "$tag" >/dev/null 2>&1; then
+            gh release upload "$tag" "$archive" --clobber
+          else
+            gh release create "$tag" "$archive" \
+              --target "${GITHUB_SHA}" \
+              --title "Argo CD Service Catalog v${VERSION}" \
+              --prerelease \
+              --generate-notes
+          fi
