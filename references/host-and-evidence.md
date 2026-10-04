@@ -36,10 +36,11 @@ Read-only inspection on 2026-10-04 established:
 - Deployment: `argocd/argocd-server`, one replica, image `quay.io/argoproj/argocd:v3.5.1`.
 - Init container: `argocd-extension-installer-service-catalog`.
 - Installer image: `quay.io/argoprojlabs/argocd-extension-installer:v1.1.0@sha256:8c1fd0dc98b6339354ab50b0cbaf331d28019e5eec7f2c257e5fb5985c3e5664`.
-- Installed release: `v0.1.0-dev.4`, from [the release archive](https://github.com/rodrigogeromin/argocd-catalog-ui-extension/releases/download/v0.1.0-dev.4/argocd-service-catalog-0.1.0-dev.4.tar.gz).
+- Installed release: `v0.1.0-dev.5`, from [the release archive](https://github.com/rodrigogeromin/argocd-catalog-ui-extension/releases/download/v0.1.0-dev.5/argocd-service-catalog-0.1.0-dev.5.tar.gz), published from commit `710f231`.
 - Shared volume: `tmp`, `emptyDir`, mounted at `/tmp` in the installer and server. The init container restores the bundle when a new pod is created.
-- Observed pod: `argocd-server-5fbbb6b584-w66fp`, Running; installer completed with exit code 0 at `2026-10-04T02:37:34Z`.
+- Observed pod: `argocd-server-6d47f88bf-zgqnf`, Ready; installer completed with exit code 0 after the v0.1.0-dev.5 rollout.
 - Bundle path: `/tmp/extensions/resources/extension-service-catalog.js`.
-- Installed bundle SHA-256: `a3f74674f51a17ede5e4f4504971836f16c903c8771d2c3e1e9c0e16ef91cff6`, read directly from the running server.
+- Release archive SHA-256: `d49e22b899eda6d43bdea6522d5346807ecdb2c4048e1b3a8487455dfbbe9ccb`.
+- Installed bundle SHA-256: `8aeaad30be271e2f45924cf164fc126b8c177292e51b32debd7bafbfd872226d`, read directly from the running server and matching the local validation report.
 
-This confirms installation persistence through the Deployment configuration, not browser interaction or deployment of the newly migrated source. Local validation regenerates evidence for new local artifacts; it does not replace the installed release or certify its UI. Keep `compatibility.integrated` empty until actual interaction is recorded for the exact target and bundle.
+This confirms installation persistence through the Deployment configuration for the migrated source release, not browser interaction. Local validation regenerates evidence for local artifacts; it does not certify UI behavior. Keep `compatibility.integrated` empty until actual interaction is recorded for the exact target and bundle.
