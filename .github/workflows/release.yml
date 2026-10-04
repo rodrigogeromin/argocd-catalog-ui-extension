@@ -1,0 +1,43 @@
+name: Build and publish extension artifact
+
+on:
+  push:
+    branches:
+      - develop
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Validate, build and package
+        run: npm run validate
+
+      - name: Check validation evidence
+        run: npm run evidence:check
+
+      - name: Name build archive
+        run: cp dist/service-catalog.tar.gz "dist/argocd-service-catalog-${GITHUB_SHA}.tar.gz"
+
+      - name: Upload extension artifact
+        uses: actions/upload-artifact@v7
+        with:
+          name: argocd-service-catalog-${{ github.sha }}
+          path: dist/argocd-service-catalog-${{ github.sha }}.tar.gz
+          if-no-files-found: error
+          retention-days: 30
+          compression-level: 0

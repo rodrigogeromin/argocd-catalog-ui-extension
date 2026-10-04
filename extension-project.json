@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 1,
+  "templateVersion": "1.0.0",
+  "name": "service-catalog",
+  "description": "Browse integrated services from the Argo CD application toolbar",
+  "argoCdVersion": "3.5.1",
+  "profile": "top-bar-action-menu",
+  "registration": {
+    "title": "Catálogo de serviços",
+    "id": "service-catalog",
+    "iconClassName": "fa fa-th-large",
+    "isMiddle": true
+  },
+  "dataSource": "host-props",
+  "origin": {
+    "templateSha256": "8f9bda368a7b5d2e2e4cf31d3362cb7f1850a6ed623cd60a8c259cab7bbfc73e",
+    "contractRevision": "80c62d9c1686ebbe6e5d8d9d423cb8a501ec1c818f9a844b885d7d8410e48701",
+    "adaptations": [
+      "Adapted the generated resource-tab scaffold to Argo CD v3.5.1 registerTopBarActionMenuExt with an application toolbar action and flyout.",
+      "Replaced resource context with readonly application/tree/openFlyout host props; added a local catalog preview and top-bar bundle harness."
+    ]
+  },
+  "compatibility": {
+    "locallySupported": [
+      "3.5.1"
+    ],
+    "integrated": []
+  }
+}
