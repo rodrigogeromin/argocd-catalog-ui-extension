@@ -1,15 +1,17 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "templateVersion": "1.0.0",
   "name": "service-catalog",
   "description": "Browse integrated services from the Argo CD application toolbar",
   "argoCdVersion": "3.5.1",
-  "profile": "top-bar-action-menu",
+  "profile": "top-bar-action",
   "registration": {
     "title": "Catálogo de serviços",
     "id": "service-catalog",
-    "iconClassName": "fa fa-th-large",
-    "isMiddle": false
+    "icon": "fa fa-th-large",
+    "isMiddle": false,
+    "shouldDisplay": true,
+    "flyout": true
   },
   "dataSource": "host-props",
   "origin": {
@@ -17,13 +19,64 @@
     "contractRevision": "80c62d9c1686ebbe6e5d8d9d423cb8a501ec1c818f9a844b885d7d8410e48701",
     "adaptations": [
       "Adapted the generated resource-tab scaffold to Argo CD v3.5.1 registerTopBarActionMenuExt with an application toolbar action and flyout.",
-      "Replaced resource context with readonly application/tree/openFlyout host props; added a local catalog preview and top-bar bundle harness."
+      "Replaced resource context with readonly application/tree/openFlyout host props; added a local catalog preview and top-bar bundle harness.",
+      {
+        "kind": "manifest-migration",
+        "fromSchema": 1,
+        "fromTemplate": "1.0.0",
+        "validatorTemplate": "2.2.1"
+      }
     ]
   },
   "compatibility": {
-    "locallySupported": [
-      "3.5.1"
-    ],
+    "localBuild": "not-run",
+    "harness": "not-run",
     "integrated": []
+  },
+  "hostContract": {
+    "sourceKind": "official",
+    "tag": "v3.5.1",
+    "sources": [
+      "https://github.com/argoproj/argo-cd/blob/v3.5.1/ui/src/app/shared/services/extensions-service.ts",
+      "https://github.com/argoproj/argo-cd/blob/v3.5.1/ui/src/app/index.tsx",
+      "https://github.com/argoproj/argo-cd/blob/v3.5.1/ui/package.json",
+      "https://github.com/argoproj/argo-cd/blob/v3.5.1/ui/pnpm-lock.yaml"
+    ],
+    "profile": "top-bar-action",
+    "method": "registerTopBarActionMenuExt",
+    "signature": "registerTopBarActionMenuExt(component, title, id, flyout, shouldDisplay?, iconClassName?, isMiddle?)",
+    "props": [
+      "application",
+      "tree",
+      "openFlyout"
+    ],
+    "globals": [
+      "React",
+      "ReactDOM",
+      "ReactJSXRuntime"
+    ],
+    "jsxMode": "automatic",
+    "argumentMap": [
+      "component",
+      "registration.title",
+      "registration.id",
+      "component.flyout",
+      "callback.shouldDisplay",
+      "registration.icon",
+      "registration.isMiddle"
+    ],
+    "flyoutProps": [
+      "application",
+      "tree"
+    ],
+    "runtime": {
+      "react": "19.2.6",
+      "reactDom": "19.2.6",
+      "typesReact": "19.2.14",
+      "typesReactDom": "19.2.3"
+    }
+  },
+  "backend": {
+    "kind": "none"
   }
 }

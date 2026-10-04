@@ -9,7 +9,7 @@ export function register(component: ComponentType<TopBarActionProps>, flyout: Co
     project.registration.id,
     flyout,
     () => true,
-    project.registration.iconClassName,
+    project.registration.icon,
     project.registration.isMiddle,
   );
 }

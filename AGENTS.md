@@ -6,7 +6,7 @@ This repository builds an Argo CD UI extension for a service catalog flyout. Kee
 
 ## Build, Preview, and Validation
 
-Run `npm ci` after changing the lockfile. `npm run dev` starts a localhost-only preview; try `http://127.0.0.1:8080/?width=360px&height=640px` and `?width=1100px&height=700px&fixture=absent`. Run `npm run validate` for typechecking, lint, tests, production build, package inspection, and host harness. Then run `npm run evidence:check` to verify the recorded source and artifact hashes. `npm run package` creates `dist/service-catalog.tar.gz` with only the deployable extension bundle.
+Run `npm run runtime:setup` when changing the audited host runtime, then `npm ci`. `npm run dev` starts a localhost-only preview; try `http://127.0.0.1:8080/?width=360px&height=640px` and `?width=1100px&height=700px&fixture=absent`. Run `npm run validate` for typechecking, lint, tests, production build, package inspection, and host harness. Then run `npm run evidence:check` to verify the recorded source and artifact hashes. `npm run package` creates `dist/service-catalog.tar.gz` with only the deployable extension bundle.
 
 ## Code and Test Conventions
 
@@ -18,4 +18,4 @@ The GitHub Actions workflow runs on pushes to `develop` and publishes prerelease
 
 ## Commits
 
-The branch has no commit history yet, so no established message convention is available. Use concise imperative subjects; `feat:`, `fix:`, and `docs:` prefixes are recommended.
+Use concise imperative subjects; `feat:`, `fix:`, and `docs:` prefixes are recommended.

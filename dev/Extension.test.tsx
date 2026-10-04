@@ -28,7 +28,7 @@ test('renders with absent optional host context', () => {
 test('uses the host toolbar button and icon without adding a nested icon or button', () => {
   const openFlyout = jest.fn();
   const {container} = render(<button className="argo-button argo-button--base" type="button" onClick={openFlyout}>
-    <i className={project.registration.iconClassName} aria-hidden="true" />
+    <i className={project.registration.icon} aria-hidden="true" />
     <span className="show-for-large"><CatalogAction /></span>
   </button>);
   fireEvent.click(screen.getByRole('button', {name: 'Catálogo'}));
@@ -41,7 +41,7 @@ test('registers the same component using the host contract', () => {
   const fn = jest.fn();
   window.extensionsAPI = {registerTopBarActionMenuExt: fn};
   register(CatalogAction, Extension);
-  expect(fn).toHaveBeenCalledWith(CatalogAction, project.registration.title, project.registration.id, Extension, expect.any(Function), project.registration.iconClassName, false);
+  expect(fn).toHaveBeenCalledWith(CatalogAction, project.registration.title, project.registration.id, Extension, expect.any(Function), project.registration.icon, false);
   delete window.extensionsAPI;
   expect(() => register(CatalogAction, Extension)).toThrow('extensionsAPI');
 });

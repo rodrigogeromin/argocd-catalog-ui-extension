@@ -16,7 +16,8 @@
     "package": "sh scripts/package.sh",
     "validate": "node scripts/validate.mjs",
     "evidence:check": "node scripts/evidence.mjs",
-    "harness": "jest --runInBand --runTestsByPath dev/HostBundle.test.tsx"
+    "harness": "jest --runInBand --runTestsByPath dev/HostBundle.test.tsx",
+    "runtime:setup": "node scripts/setup-runtime.mjs"
   },
   "devDependencies": {
     "@eslint/js": "9.39.4",

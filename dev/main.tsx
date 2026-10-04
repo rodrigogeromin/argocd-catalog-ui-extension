@@ -15,7 +15,7 @@ function Preview() {
   return <div className="preview-shell" style={{width: query.get('width') ?? '100%', minHeight: query.get('height') ?? '100%'}}>
     <div className="preview-toolbar"><span className="preview-app">example-application</span>
       <button className="argo-button argo-button--base" type="button" onClick={() => setOpen(true)}>
-        <i className={project.registration.iconClassName} aria-hidden="true" />
+        <i className={project.registration.icon} aria-hidden="true" />
         <span className="show-for-large"><CatalogAction /></span>
       </button>
     </div>
